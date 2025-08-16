@@ -3,6 +3,12 @@ import { beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 
 import { prompt } from './prompt.ts';
 
+// vi.mock('prompts', () => ({
+//   default: vi.fn(),
+// }));
+
+// vi.mocked(prompts).mockResolvedValue({ username: 'testuser' });
+
 describe('prompt wrapper', () => {
   const onSubmitSpy = vi.fn().mockName('onSubmit');
 
