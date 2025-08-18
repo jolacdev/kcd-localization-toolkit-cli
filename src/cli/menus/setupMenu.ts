@@ -1,33 +1,25 @@
-import { appState } from '../../appState.ts';
+import { AppState } from '../../AppState.ts';
 import { gameFolderMenu } from './gameFolderMenu.ts';
 import { languageMenu } from './languageMenu.ts';
 
-// const handleChangeLanguage = async (
-//   language: SupportedLanguage,
-// ): Promise<void> => {
-//   await i18next.changeLanguage(language);
-
-//   if (i18next.resolvedLanguage === language) {
-//     setStoreSetting('language', language);
-//   }
-// };
-
 export const setupMenu = async () => {
-  if (!appState.kcdPath) {
+  const state = AppState.getInstance();
+
+  if (!state.gamePath) {
     await gameFolderMenu();
   }
 
-  if (!appState.kcdPath) {
-    appState.exit = true;
+  if (!state.gamePath) {
+    state.requestExit();
     return;
   }
 
-  if (!appState.language) {
+  if (!state.language) {
     await languageMenu();
   }
 
-  if (!appState.language) {
-    appState.exit = true;
+  if (!state.language) {
+    state.requestExit();
     return;
   }
 };
