@@ -1,5 +1,12 @@
 {
   "appTitle": "KCD - Localization Toolkit (CLI)",
+  "setupMenu": {
+    "title": "Initial Setup",
+    "options": {
+      "selectInstallFolder": "Select KCD installation folder",
+      "chooseLanguage": "Select language"
+    }
+  },
   "mainMenu": {
     "options": {
       "moddingToolkit": "Modding Toolkit",

@@ -1,5 +1,12 @@
 {
   "appTitle": "KCD - Kit de Herramientas para Localización (CLI)",
+  "setupMenu": {
+    "title": "Initial Setup",
+    "options": {
+      "selectInstallFolder": "Selecciona el directorio de instalación de KCD",
+      "chooseLanguage": "Selecciona el idioma"
+    }
+  },
   "mainMenu": {
     "options": {
       "moddingToolkit": "Kit de Herramientas de Modding",
