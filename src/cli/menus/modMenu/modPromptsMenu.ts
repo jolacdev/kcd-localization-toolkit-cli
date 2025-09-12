@@ -56,6 +56,7 @@ export const modPromptsMenu = async ({
     {
       message: t('selectLanguages.secondary'),
       name: 'secondaryLanguage',
+      // TODO: Limit options, if non-English language is selected there should be only English and vice versa.
       choices: (prev: GameSupportedLanguage) =>
         gameLanguageOptions.filter(({ value }) => value !== prev),
       type: (prev: GameSupportedLanguage) =>
