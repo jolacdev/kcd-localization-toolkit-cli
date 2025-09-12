@@ -8,7 +8,7 @@ import { Folder, LocalizationFile } from '../constants/constants.ts';
 // 3- Colorize alternative language (&lt;font color='#fcf795'&gt;) (KI - Selected texts lose the color)
 // 3.1 - Allow custom color?
 // 4- Allow language prefix "[EN] - Some text..."
-// 5- Remove dialog timers
+// 5- Remove dialog timers (topic.xml + topic.tbl)
 
 // NOTE: Check mods: KCD Bilingual Generator and A Sorted Inventory
 
@@ -73,20 +73,3 @@ Object.values(LocalizationFile).forEach((file) => {
 
   fs.writeFileSync(xmlOutputPath, modifiedXml, 'utf-8');
 });
-
-// let xml = fs.readFileSync(
-//   'C:\\Users\\Kabocha\\Desktop\\Pruebas KCD XML\\Spanish_xml\\text_ui_ingame.xml',
-//   'utf-8',
-// );
-
-// xml = xml.replace(
-//   /<Row>\s*<Cell>([\s\S]*?)<\/Cell>\s*<Cell>([\s\S]*?)<\/Cell>\s*<Cell>([\s\S]*?)<\/Cell>\s*<\/Row>/g,
-//   (match, id, english, translation) => {
-//     if (translation.includes(english)) {
-//       return match; // ya está concatenado
-//     }
-//     return `<Row><Cell>${id}</Cell><Cell>${addTextWithColor(english)}</Cell><Cell>${english} / ${translation}</Cell></Row>`;
-//   },
-// );
-
-// fs.writeFileSync(`${pakPath}\\text_ui_ingame.xml`, xml, 'utf-8');
