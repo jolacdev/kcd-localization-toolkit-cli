@@ -3,7 +3,11 @@ import path from 'path';
 import yauzl, { Entry } from 'yauzl';
 import yazl from 'yazl';
 
-import { LocalizationFile } from '../constants/constants.ts';
+import pakNames from '../../data/pakNames.json' with { type: 'json' };
+import {
+  GameSupportedLanguage,
+  LocalizationFile,
+} from '../constants/constants.ts';
 
 type PakFilePath = `${string}.pak`;
 
@@ -160,3 +164,7 @@ export const writePak = async (
 
     zipfile.end();
   });
+
+export const getLocalizationPakFileName = (
+  gameLanguage: GameSupportedLanguage,
+): PakFilePath => `${pakNames[gameLanguage]}_xml.pak`;

@@ -1,5 +1,6 @@
 import { t } from 'i18next';
 
+import { AppState } from '../../AppState.ts';
 import { getStoreSetting, hasStoreSetting } from '../../config/store.ts';
 import { prompt } from '../prompt.ts';
 import { exitMenu } from './exitMenu.ts';
@@ -22,7 +23,8 @@ const menuOptions: Record<OptionKey, () => Promise<void>> = {
 };
 
 export const mainMenu = async () => {
-  const isGamePathSet = hasStoreSetting('gamePath');
+  const appState = AppState.getInstance();
+  const isGamePathSet = !!appState.gamePath;
 
   const { value } = <{ value: OptionKey }>await prompt({
     message: t('appTitle'),
@@ -38,7 +40,7 @@ export const mainMenu = async () => {
           ]
         : []),
       {
-        title: `${t('mainMenu.options.changeInstallFolder')}${isGamePathSet ? ` (${getStoreSetting('gamePath')})` : ''}`,
+        title: `${t('mainMenu.options.changeInstallFolder')}${isGamePathSet ? ` (${appState.gamePath})` : ''}`,
         value: OptionKey.CHANGE_INSTALL_FOLDER,
       },
       {

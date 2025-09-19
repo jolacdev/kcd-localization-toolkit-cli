@@ -11,8 +11,8 @@
   "moddingMenu": {
     "title": "Modding Toolkit - Select an option",
     "options": {
-      "dualSubsBasic": "Generate dual subtitles (basic)",
-      "dualSubsAdvanced": "Generate dual subtitles (advanced)",
+      "dualSubsBasic": "Generate dual subtitles (basic). * Applicable for dialogs, item descriptions.",
+      "dualSubsAdvanced": "Generate dual subtitles (advanced). * Only for dialogs.",
       "categorizeItems": "Categorize items",
       "removeTimers": "Remove conversation response timers"
     },
