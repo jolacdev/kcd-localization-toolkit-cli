@@ -60,20 +60,20 @@ export const modMenu = async () => {
     return;
   }
 
-  const inputPak = getCorrespondingLocalizationPakPath(
+  const inputPakPath = getCorrespondingLocalizationPakPath(
     appState.gamePath!,
     mainLanguage,
     secondaryLanguage,
   );
 
-  if (!inputPak) {
+  if (!inputPakPath) {
     // TODO: Handle
     return;
   }
 
   generateLocalizationFiles({
     dialogColor,
-    inputPak,
+    inputPakPath,
     mainLanguage,
     hasCategories,
     hasDualLanguage: Boolean(mainLanguage && secondaryLanguage),

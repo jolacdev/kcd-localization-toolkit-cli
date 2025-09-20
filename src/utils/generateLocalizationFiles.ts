@@ -6,7 +6,7 @@ import {
   LocalizationFile,
   SUPPORTED_LOCALIZATION_FILES,
 } from '../constants/constants.ts';
-import { readXmlFromPak } from './pakUtils.ts';
+import { isPakFile, readXmlFromPak, writePak } from './pakUtils.ts';
 import { isXmlFile, writeXml } from './xml/fileUtils.ts';
 import { transformDialogTranslation } from './xml/localization/transformDialogTranslation.ts';
 import { transformHUDTranslation } from './xml/localization/transformHUDTranslation.ts';
@@ -84,7 +84,7 @@ const transformLocalizationXmlContent = ({
   });
 
 type GenerateLocalizationFilesOptions = {
-  inputPak: PakFilePath;
+  inputPakPath: PakFilePath;
   mainLanguage: GameSupportedLanguage;
   dialogColor?: string;
   hasCategories: boolean;
@@ -93,15 +93,29 @@ type GenerateLocalizationFilesOptions = {
 
 export const generateLocalizationFiles = async ({
   dialogColor,
-  inputPak,
+  inputPakPath,
   mainLanguage: language,
   hasCategories,
   hasDualLanguage,
 }: GenerateLocalizationFilesOptions) => {
+  const pakBasename = path.basename(inputPakPath);
+  const outputPakPath = path.join(
+    process.cwd(),
+    Folder.Mod,
+    Folder.Localization,
+    pakBasename,
+  );
+  const filesToPak = [];
+
+  if (!isPakFile(outputPakPath)) {
+    return;
+    // TODO: Handle
+  }
+
   for (const file of SUPPORTED_LOCALIZATION_FILES) {
     let xml;
     try {
-      xml = await readXmlFromPak(inputPak, file);
+      xml = await readXmlFromPak(inputPakPath, file);
     } catch (error) {
       console.log(error instanceof Error ? error.message : error);
       continue;
@@ -132,5 +146,11 @@ export const generateLocalizationFiles = async ({
     }
 
     writeXml(xmlOutputPath, transformedXml);
+    filesToPak.push(xmlOutputPath);
   }
+
+  const xmlInputFiles = filesToPak.map((xmlFile) => ({
+    filePath: xmlFile,
+  }));
+  writePak(outputPakPath, xmlInputFiles);
 };
